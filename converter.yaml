@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doc-2-pdf-converter
+  labels:
+    app: doc-2-pdf-converter
+  namespace: d2p
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doc-2-pdf-converter
+  template:
+    metadata:
+      labels:
+        app: doc-2-pdf-converter
+    spec:
+      containers:
+        - name: doc-2-pdf-converter
+          image: ghcr.io/unoconv/unoserver-docker
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: 2
+            limits:
+              memory: "2Gi"
+              cpu: 3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2003
+              name: converter-port

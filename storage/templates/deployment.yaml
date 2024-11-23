@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doc-2-pdf-storage
+  labels:
+    app: doc-2-pdf-storage
+  namespace: d2p
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doc-2-pdf-storage
+  template:
+    metadata:
+      labels:
+        app: doc-2-pdf-storage
+    spec:
+      containers:
+        - name: doc-2-pdf-storage
+          image: utkarsh1905/doc2pdf-storage:latest
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: 2
+            limits:
+              memory: "1Gi"
+              cpu: 3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: storage-api-port
+          envFrom:
+            - secretRef:
+                name: doc-2-pdf-secrets

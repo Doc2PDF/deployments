@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: doc-2-pdf-ingress
+  namespace: d2p
+spec:
+  ingressClassName: "alb"
+  rules:
+    - http:
+        paths:
+          - path: /api/
+            pathType: Prefix
+            backend:
+              service:
+                name: doc-2-pdf-service
+                port:
+                  number: 80
+          - path: /storage/
+            pathType: Prefix
+            backend:
+              service:
+                name: doc-2-storage-service
+                port:
+                  number: 80

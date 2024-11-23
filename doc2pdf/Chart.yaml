@@ -1,0 +1,6 @@
+apiVersion: v2
+name: doc2pdf
+description: Doc2PDF helm charts
+type: application
+version: 0.0.1
+appVersion: "1.16.0"

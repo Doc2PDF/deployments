@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  doc2pdf:
+    image: utkarsh1905/doc2pdf
+    volumes:
+      - shared-output:/output
+    environment:
+      UNOSERVER_HOST: "127.0.0.1"
+      UNOSERVER_PORT: "2003"
+    network_mode: "host"
+
+  storage:
+    image: utkarsh1905/doc2pdf-storage
+    network_mode: "host"
+    volumes:
+      - shared-output:/output
+
+  unoserver:
+    image: ghcr.io/unoconv/unoserver-docker
+    container_name: unoserver
+    network_mode: "host"
+
+volumes:
+  shared-output:
