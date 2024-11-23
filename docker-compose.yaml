@@ -3,6 +3,7 @@ version: "3.9"
 services:
   doc2pdf:
     image: utkarsh1905/doc2pdf
+    container_name: doc2pdf
     volumes:
       - shared-output:/output
     environment:
@@ -12,6 +13,7 @@ services:
 
   storage:
     image: utkarsh1905/doc2pdf-storage
+    container_name: doc2pdf-storage
     network_mode: "host"
     volumes:
       - shared-output:/output
@@ -20,6 +22,12 @@ services:
     image: ghcr.io/unoconv/unoserver-docker
     container_name: unoserver
     network_mode: "host"
+
+  frontend:
+    image: utkarsh1905/doc2pdf-platform
+    container_name: doc2pdf-platform
+    ports:
+      - "80:3000"
 
 volumes:
   shared-output:

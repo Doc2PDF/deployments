@@ -4,7 +4,7 @@ metadata:
   name: doc-2-pdf-ingress
   namespace: d2p
 spec:
-  ingressClassName: "alb"
+  ingressClassName: "alb" # for alb aws load balancer
   rules:
     - http:
         paths:
